@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_checked="false">
+        <layer-list>
+            <item>
+                <!--绘制 圆形-->
+                <shape
+                    android:shape="oval">
+                    <!--填充颜色-->
+                    <solid android:color="#fff"/>
+                    <!--描边 白色 宽度1px-->
+                    <stroke android:color="#FFF"
+                        android:width="1px"/>
+                    <!--内容与该圆形的间距-->
+                    <padding
+                        android:bottom="7dp"
+                        android:left="7dp"
+                        android:right="7dp"
+                        android:top="7dp"/>
+                </shape>
+            </item>
+            <!--导入图片 -->
+            <item android:drawable="@mipmap/main_bg_btn1_1" />
+        </layer-list>
+    </item>
+    <item android:state_checked="true">
+        <layer-list>
+            <item>
+                <!--绘制 圆形-->
+                <shape
+                    android:shape="oval">
+                    <!--填充颜色-->
+                    <solid android:color="#FFF"/>
+                    <!--描边 白色 宽度1px-->
+                    <stroke android:color="#FFF"
+                        android:width="1px"/>
+                    <!--内容与该圆形的间距-->
+                    <padding
+                        android:bottom="8dp"
+                        android:left="8dp"
+                        android:right="8dp"
+                        android:top="8dp"/>
+                </shape>
+            </item>
+            <!--导入图片 -->
+            <item
+                android:drawable="@mipmap/main_bg_btn1_2"
+                />
+        </layer-list>
+    </item>
+</selector>

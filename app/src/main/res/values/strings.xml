@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">SongOfBest</string>
+    <string name="button1_text">社区</string>
+    <string name="button2_text">发现</string>
+    <string name="button3_text">K歌</string>
+    <string name="button4_text">美化</string>
+    <string name="button5_text">我的</string>
+    <string name="recording">正在录音</string>
+    <string name="recorded">已停止录音</string>
+    <string name="boss">重低音设置</string>
+    <string name="pross">音场选择</string>
+    <string name="equalize">均衡器设置</string>
+    <string name="start_record">开始录音</string>
+    <string name="start_connect">开始连接</string>
+    <string name="fail_connect">连接失败</string>
+    <string name="no_connect">请先连接设备</string>
+    <string name="start_record_send">开始录音发送</string>
+    <string name="searched">搜索结束</string>
+
+    <string-array name="music_list">
+        <item>贝多芬的悲伤</item>
+        <item>玫瑰花的葬礼-许嵩</item>
+        <item>你若成风-许嵩</item>
+        <item>星座书上-许嵩</item>
+        <item>1khz</item>
+    </string-array>
+</resources>
