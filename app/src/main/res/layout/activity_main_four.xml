@@ -8,10 +8,87 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/linear"
         android:orientation="vertical"
-        tools:context=".Fourth.Remand">
+        tools:context=".Fourth.MainFourActivity">
+        <ListView
+            android:id="@+id/music_listview"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
 
+        <ListView
+            android:visibility="gone"
+            android:id="@+id/lsitview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <activitytest.example.com.songofbest.Fourth.BaseVisualizerView
+            android:id="@+id/mybase"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+        <!--<TextView-->
+            <!--android:text="均衡器设置"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content" />-->
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="录音音量"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <SeekBar
+                android:id="@+id/recoord_seek"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="音乐音量"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <SeekBar
+                android:id="@+id/music_seek"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="@string/boss"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <SeekBar
+                android:id="@+id/wie_seek"
+                android:layout_width="0dp"
+                android:layout_weight="3"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -72,63 +149,5 @@
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="录音音量"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
-
-            <SeekBar
-                android:id="@+id/recoord_seek"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:text="音乐音量"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content" />
-
-            <SeekBar
-                android:id="@+id/music_seek"
-                android:layout_width="0dp"
-                android:layout_weight="3"
-                android:layout_height="wrap_content" />
-        </LinearLayout>
-
-        <ListView
-            android:id="@+id/music_listview"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="300dp" />
-
-        <ListView
-            android:visibility="gone"
-            android:id="@+id/lsitview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <activitytest.example.com.songofbest.Fourth.BaseVisualizerView
-            android:id="@+id/mybase"
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
-
-        <TextView
-            android:text="均衡器设置"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </LinearLayout>
 </ScrollView>

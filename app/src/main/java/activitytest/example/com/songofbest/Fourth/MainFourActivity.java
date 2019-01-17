@@ -1,6 +1,4 @@
 package activitytest.example.com.songofbest.Fourth;
-
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -17,10 +15,7 @@ import android.media.audiofx.PresetReverb;
 import android.media.audiofx.Visualizer;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -107,7 +102,7 @@ public class MainFourActivity extends AppCompatActivity implements View.OnClickL
 //
 //		}
 	}
-
+  //歌曲列表
 	private void initListener() {
 		myAdapter = new MyAdapter(devices,this);
 		mListView.setAdapter(myAdapter);
@@ -316,145 +311,17 @@ public class MainFourActivity extends AppCompatActivity implements View.OnClickL
 		mAudioUtil.setmSendData(this);
 
 		regerst();
-		setupEqualizeFxAndUi();
-		setupBassBoost();
-		setupPresetReverb();
+
+		setupEqualizeFxAndUi();//均衡器
+
+		setupPresetReverb();//音场选择
+
+		setupBassBoost();//重低音设置
 	}
+
 
 	/**
-	 * ͨ��mMediaPlayer���ص�AudioSessionId����һ�����ȼ�Ϊ0���������� ����ͨ��Ƶ��������Ӧ��UI�Ͷ�Ӧ���¼�
-	 */
-	//均衡器
-	private void setupEqualizeFxAndUi()
-	{
-		mEqualizer = new Equalizer(0, mAudioUtil.getId());
-//		mEqualizer = new Equalizer(0, 0);
-		mEqualizer.setEnabled(true);// ���þ�����
-
-		// ͨ���������õ���֧�ֵ�Ƶ������
-		short bands = mEqualizer.getNumberOfBands();
-
-		// getBandLevelRange ��һ�����飬����һ��Ƶ�׵ȼ����飬
-		// ��һ���±�Ϊ��͵��޶ȷ�Χ
-		// �ڶ����±�Ϊ��������,����ȡ��
-		final short minEqualizer = mEqualizer.getBandLevelRange()[0];
-		final short maxEqualizer = mEqualizer.getBandLevelRange()[1];
-		maxpro = maxEqualizer-minEqualizer;
-
-		for (short i = 0; i < bands; i++)
-		{
-			final short band = i;
-
-			TextView freqTextView = new TextView(this);
-			freqTextView.setLayoutParams(new ViewGroup.LayoutParams(
-					ViewGroup.LayoutParams.FILL_PARENT,
-					ViewGroup.LayoutParams.WRAP_CONTENT));
-
-			freqTextView.setGravity(Gravity.CENTER_HORIZONTAL);
-
-			// ȡ������Ƶ��
-			freqTextView
-					.setText((mEqualizer.getCenterFreq(band) / 1000) + "HZ");
-			mLayout.addView(freqTextView);
-
-			LinearLayout row = new LinearLayout(this);
-			row.setOrientation(LinearLayout.HORIZONTAL);
-
-			TextView minDbTextView = new TextView(this);
-			minDbTextView.setLayoutParams(new ViewGroup.LayoutParams(
-					ViewGroup.LayoutParams.WRAP_CONTENT,
-					ViewGroup.LayoutParams.WRAP_CONTENT));
-
-			minDbTextView.setText((minEqualizer / 100) + " dB");
-
-			TextView maxDbTextView = new TextView(this);
-			maxDbTextView.setLayoutParams(new ViewGroup.LayoutParams(
-					ViewGroup.LayoutParams.WRAP_CONTENT,
-					ViewGroup.LayoutParams.WRAP_CONTENT));
-			maxDbTextView.setText((maxEqualizer / 100) + " dB");
-
-			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-					ViewGroup.LayoutParams.FILL_PARENT,
-					ViewGroup.LayoutParams.WRAP_CONTENT);
-
-			layoutParams.weight = 1;
-
-			SeekBar sb = new SeekBar(this);
-			sb.setLayoutParams(layoutParams);
-			sb.setMax(maxpro);
-			sb.setProgress(mEqualizer.getBandLevel(band));
-
-			sb.setOnSeekBarChangeListener(new OnSeekBarChangeListener()
-			{
-
-				@Override
-				public void onStopTrackingTouch(SeekBar seekBar)
-				{
-				}
-
-				@Override
-				public void onStartTrackingTouch(SeekBar seekBar)
-				{
-				}
-
-				@Override
-				public void onProgressChanged(SeekBar seekBar, int progress,
-											  boolean fromUser)
-				{
-					// TODO Auto-generated method stub
-					mEqualizer.setBandLevel(band,
-							(short) (progress + minEqualizer));
-				}
-			});
-			row.addView(minDbTextView);
-			row.addView(sb);
-			row.addView(maxDbTextView);
-			equalizeSeekbars.add(sb);
-			mLayout.addView(row);
-		}
-
-	}
-	//重低音设置
-	private void setupBassBoost()
-	{
-		// ��MediaPlayer��AudioSessionId����BassBoost
-		// �൱������BassBoost������Ƹ�MediaPlayer
-		mBass = new BassBoost(0, mAudioUtil.getId());
-		// ���������ص���Ч��
-		mBass.setEnabled(true);
-		TextView bbTitle = new TextView(this);
-		bbTitle.setText(R.string.boss);
-		mLayout.addView(bbTitle);
-		// ʹ��SeekBar��Ϊ�ص����ĵ�������
-		SeekBar bar = new SeekBar(this);
-		// �ص����ķ�ΧΪ0��1000
-		bar.setMax(1000);
-		bar.setProgress(0);
-		// ΪSeekBar���϶��¼������¼�������
-		bar.setOnSeekBarChangeListener(new SeekBar
-				.OnSeekBarChangeListener()
-		{
-			@Override
-			public void onProgressChanged(SeekBar seekBar
-					, int progress, boolean fromUser)
-			{
-				// �����ص�����ǿ��
-				mBass.setStrength((short) progress);
-			}
-			@Override
-			public void onStartTrackingTouch(SeekBar seekBar)
-			{
-			}
-			@Override
-			public void onStopTrackingTouch(SeekBar seekBar)
-			{
-			}
-		});
-		mLayout.addView(bar);
-	}
-
-	/**
-	 * ��ʼ��Ԥ������������
+	 * 音场设置
 	 */
 	private void setupPresetReverb()
 	{
@@ -506,6 +373,136 @@ public class MainFourActivity extends AppCompatActivity implements View.OnClickL
 		mLayout.addView(sp);
 	}
 
+	/**
+	 * ͨ��mMediaPlayer���ص�AudioSessionId����һ�����ȼ�Ϊ0���������� ����ͨ��Ƶ��������Ӧ��UI�Ͷ�Ӧ���¼�
+	 */
+	/**均衡器*/
+	private void setupEqualizeFxAndUi()
+	{
+		mEqualizer = new Equalizer(0, mAudioUtil.getId());
+//		mEqualizer = new Equalizer(0, 0);
+		mEqualizer.setEnabled(true);// ���þ�����
+
+		// ͨ���������õ���֧�ֵ�Ƶ������
+		short bands = mEqualizer.getNumberOfBands();
+
+		// getBandLevelRange ��һ�����飬����һ��Ƶ�׵ȼ����飬
+		// ��һ���±�Ϊ��͵��޶ȷ�Χ
+		// �ڶ����±�Ϊ��������,����ȡ��
+		final short minEqualizer = mEqualizer.getBandLevelRange()[0];
+		final short maxEqualizer = mEqualizer.getBandLevelRange()[1];
+		maxpro = maxEqualizer-minEqualizer;
+		LinearLayout junhenqi = new LinearLayout(this);
+		junhenqi.setOrientation(LinearLayout.HORIZONTAL);
+		mLayout.addView(junhenqi);
+		for (short i = 0; i < bands; i++)
+		{
+			final short band = i;
+			LinearLayout row = new LinearLayout(this);
+			row.setOrientation(LinearLayout.VERTICAL);
+			row.setMinimumHeight(400);
+			TextView freqTextView = new TextView(this);
+			freqTextView.setLayoutParams(new ViewGroup.LayoutParams(
+					ViewGroup.LayoutParams.WRAP_CONTENT,
+					ViewGroup.LayoutParams.WRAP_CONTENT));
+
+//			freqTextView.setGravity(Gravity.CENTER_HORIZONTAL);
+
+
+			freqTextView.setText((mEqualizer.getCenterFreq(band) / 1000) + "HZ");
+			row.addView(freqTextView);
+
+			TextView minDbTextView = new TextView(this);
+			minDbTextView.setLayoutParams(new ViewGroup.LayoutParams(
+					ViewGroup.LayoutParams.WRAP_CONTENT,
+					ViewGroup.LayoutParams.WRAP_CONTENT));
+
+			minDbTextView.setText((minEqualizer / 100) + " dB");
+
+//			TextView maxDbTextView = new TextView(this);
+//			maxDbTextView.setLayoutParams(new ViewGroup.LayoutParams(
+//					ViewGroup.LayoutParams.WRAP_CONTENT,
+//					ViewGroup.LayoutParams.WRAP_CONTENT));
+//			maxDbTextView.setText((maxEqualizer / 100) + " dB");
+
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+					ViewGroup.LayoutParams.MATCH_PARENT,
+					ViewGroup.LayoutParams.WRAP_CONTENT);
+
+			layoutParams.weight = 1;
+
+			verSeekbar sb = new verSeekbar(this);
+
+			sb.setLayoutParams(layoutParams);
+			sb.setMax(maxpro);
+			sb.setProgress(mEqualizer.getBandLevel(band));
+
+			sb.setOnSeekBarChangeListener(new OnSeekBarChangeListener()
+			{
+
+				@Override
+				public void onStopTrackingTouch(SeekBar seekBar)
+				{
+				}
+
+				@Override
+				public void onStartTrackingTouch(SeekBar seekBar)
+				{
+				}
+
+				@Override
+				public void onProgressChanged(SeekBar seekBar, int progress,
+											  boolean fromUser)
+				{
+					// TODO Auto-generated method stub
+					mEqualizer.setBandLevel(band,
+							(short) (progress + minEqualizer));
+				}
+			});
+
+			row.addView(sb);
+			row.addView(minDbTextView);
+//			row.addView(maxDbTextView);
+			equalizeSeekbars.add(sb);
+			junhenqi.addView(row);
+		}
+
+	}
+
+	/**重低音设置*/
+	private void setupBassBoost()
+	{
+		// ��MediaPlayer��AudioSessionId����BassBoost
+		// �൱������BassBoost������Ƹ�MediaPlayer
+		mBass = new BassBoost(0, mAudioUtil.getId());
+		// ���������ص���Ч��
+		mBass.setEnabled(true);
+		// ʹ��SeekBar��Ϊ�ص����ĵ�������
+		SeekBar bar = findViewById(R.id.wie_seek);
+		// �ص����ķ�ΧΪ0��1000
+		bar.setMax(1000);
+		bar.setProgress(0);
+		// ΪSeekBar���϶��¼������¼�������
+		bar.setOnSeekBarChangeListener(new SeekBar
+				.OnSeekBarChangeListener()
+		{
+			@Override
+			public void onProgressChanged(SeekBar seekBar
+					, int progress, boolean fromUser)
+			{
+				// �����ص�����ǿ��
+				mBass.setStrength((short) progress);
+			}
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar)
+			{
+			}
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar)
+			{
+			}
+		});
+	}
 	/**
 	 * ����һ��VisualizerView����ʹ��ƵƵ�׵Ĳ����ܹ���ӳ�� VisualizerView��
 	 */

@@ -11,7 +11,6 @@ import android.widget.TextView;
 import activitytest.example.com.songofbest.First.MainTopActivity;
 import activitytest.example.com.songofbest.Fiveth.MainSixActivity;
 import activitytest.example.com.songofbest.Fourth.MainFourActivity;
-import activitytest.example.com.songofbest.Fourth.Remand;
 import activitytest.example.com.songofbest.Second.MainSecondActivity;
 import activitytest.example.com.songofbest.Thild.MainThildActivity;
 
@@ -96,7 +95,7 @@ public class MainActivity extends TabActivity implements View.OnClickListener{
                 text_btn3.setTextSize(12);
                 text_btn1.setTextSize(12);
                 text_btn5.setTextSize(12);
-                title_text.setText("美化");
+                title_text.setText("声音");
                 text_btn1.setTextColor(0xff000000);
                 text_btn2.setTextColor(0xff000000);
                 text_btn3.setTextColor(0xff000000);
